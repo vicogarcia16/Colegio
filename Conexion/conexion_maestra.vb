@@ -1,6 +1,14 @@
 ﻿Imports System.Data.SqlClient
+Imports DotNetEnv
 Module conexion_maestra
-    Public conexion As New SqlConnection("Data source=MSI\SQLEXPRESS;Initial Catalog=basecolegio;Integrated Security=True")
+    Public conexion As SqlConnection
+    Sub New()
+        ' Cargar las variables de entorno
+        Env.Load()
+        ' Obtener la cadena de conexión desde la variable de entorno
+        Dim connectionString As String = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")
+        conexion = New SqlConnection(connectionString)
+    End Sub
     Sub abrir()
         If conexion.State = 0 Then
             conexion.Open()

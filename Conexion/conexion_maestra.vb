@@ -1,24 +1,33 @@
 ﻿Imports System.Data.SqlClient
 Imports DotNetEnv
+
 Module conexion_maestra
     Public conexion As SqlConnection
+
     Sub New()
-        ' Cargar las variables de entorno
-        Env.Load()
-        ' Obtener la cadena de conexión desde la variable de entorno
-        Dim connectionString As String = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")
+        Env.TraversePath().Load()
+        Dim server As String = Environment.GetEnvironmentVariable("DATABASE_SERVER")
+        Dim database As String = Environment.GetEnvironmentVariable("DATABASE_NAME")
+        Dim connectionString As String = $"Data Source={server}; Initial Catalog={database}; Integrated Security=SSPI;"
         conexion = New SqlConnection(connectionString)
     End Sub
-    Sub abrir()
-        If conexion.State = 0 Then
-            conexion.Open()
 
-        End If
+    Sub Abrir()
+        Try
+            If conexion.State = 0 Then
+                conexion.Open()
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error al abrir la conexión: " & ex.Message)
+        End Try
     End Sub
-
-    Sub cerrar()
-        If conexion.State = 1 Then
-            conexion.Close()
-        End If
+    Sub Cerrar()
+        Try
+            If conexion.State = 1 Then
+                conexion.Close()
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error al cerrar la conexión: " & ex.Message)
+        End Try
     End Sub
 End Module

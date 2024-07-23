@@ -1,4 +1,5 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿Imports System.Data.SqlClient
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Usuarios
     Inherits System.Windows.Forms.Form
 
@@ -43,14 +44,14 @@ Partial Class Usuarios
         CheckBox2 = New CheckBox()
         CheckBox1 = New CheckBox()
         Label3 = New Label()
-        TextBox3 = New TextBox()
+        txtPass = New TextBox()
         Label5 = New Label()
-        TextBox2 = New TextBox()
+        txtUsuario = New TextBox()
         Label4 = New Label()
         MenuStrip1 = New MenuStrip()
         GuardarToolStripMenuItem = New ToolStripMenuItem()
         GuardarCambiosToolStripMenuItem = New ToolStripMenuItem()
-        TextBox1 = New TextBox()
+        txtNombre = New TextBox()
         Label2 = New Label()
         PictureBox1 = New PictureBox()
         Panel1.SuspendLayout()
@@ -79,7 +80,7 @@ Partial Class Usuarios
         Button1.BackColor = Color.Transparent
         Button1.FlatAppearance.BorderSize = 0
         Button1.FlatStyle = FlatStyle.Flat
-        Button1.Font = New Font("Segoe UI", 12F, FontStyle.Bold)
+        Button1.Font = New Font("Segoe UI", 12.0F, FontStyle.Bold)
         Button1.Location = New Point(930, 10)
         Button1.Name = "Button1"
         Button1.Size = New Size(38, 36)
@@ -90,7 +91,7 @@ Partial Class Usuarios
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Font = New Font("Segoe UI", 12F)
+        Label1.Font = New Font("Segoe UI", 12.0F)
         Label1.ForeColor = Color.Navy
         Label1.Location = New Point(9, 14)
         Label1.Name = "Label1"
@@ -123,7 +124,7 @@ Partial Class Usuarios
         ' ToolStripMenuItem1
         ' 
         ToolStripMenuItem1.BackColor = Color.Transparent
-        ToolStripMenuItem1.Font = New Font("Segoe UI", 12F)
+        ToolStripMenuItem1.Font = New Font("Segoe UI", 12.0F)
         ToolStripMenuItem1.ForeColor = Color.White
         ToolStripMenuItem1.Image = CType(resources.GetObject("ToolStripMenuItem1.Image"), Image)
         ToolStripMenuItem1.Name = "ToolStripMenuItem1"
@@ -131,7 +132,7 @@ Partial Class Usuarios
         ' 
         ' txtBusca
         ' 
-        txtBusca.Font = New Font("Segoe UI", 10F)
+        txtBusca.Font = New Font("Segoe UI", 10.0F)
         txtBusca.Location = New Point(54, 15)
         txtBusca.Name = "txtBusca"
         txtBusca.Size = New Size(390, 30)
@@ -139,29 +140,28 @@ Partial Class Usuarios
         ' 
         ' dataListado
         ' 
-        dataListado.AllowUserToAddRows = False
         dataListado.AllowUserToDeleteRows = False
         dataListado.AllowUserToResizeRows = False
         dataListado.BackgroundColor = Color.White
         dataListado.BorderStyle = BorderStyle.None
         dataListado.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        dataListado.Dock = DockStyle.Fill
-        dataListado.Location = New Point(0, 0)
+        dataListado.Location = New Point(0, 122)
         dataListado.Name = "dataListado"
+        dataListado.ReadOnly = True
         dataListado.RowHeadersWidth = 51
         dataListado.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        dataListado.Size = New Size(977, 537)
+        dataListado.Size = New Size(977, 415)
         dataListado.TabIndex = 2
         ' 
         ' Panel4
         ' 
         Panel4.Controls.Add(Panel5)
-        Panel4.Controls.Add(TextBox3)
+        Panel4.Controls.Add(txtPass)
         Panel4.Controls.Add(Label5)
-        Panel4.Controls.Add(TextBox2)
+        Panel4.Controls.Add(txtUsuario)
         Panel4.Controls.Add(Label4)
         Panel4.Controls.Add(MenuStrip1)
-        Panel4.Controls.Add(TextBox1)
+        Panel4.Controls.Add(txtNombre)
         Panel4.Controls.Add(Label2)
         Panel4.Location = New Point(125, 137)
         Panel4.Name = "Panel4"
@@ -189,7 +189,7 @@ Partial Class Usuarios
         ' 
         CheckBox9.AutoSize = True
         CheckBox9.BackColor = Color.Transparent
-        CheckBox9.Font = New Font("Segoe UI", 10F)
+        CheckBox9.Font = New Font("Segoe UI", 10.0F)
         CheckBox9.ForeColor = Color.Brown
         CheckBox9.Location = New Point(14, 313)
         CheckBox9.Name = "CheckBox9"
@@ -202,7 +202,7 @@ Partial Class Usuarios
         ' 
         CheckBox8.AutoSize = True
         CheckBox8.BackColor = Color.Transparent
-        CheckBox8.Font = New Font("Segoe UI", 10F)
+        CheckBox8.Font = New Font("Segoe UI", 10.0F)
         CheckBox8.ForeColor = Color.Brown
         CheckBox8.Location = New Point(14, 280)
         CheckBox8.Name = "CheckBox8"
@@ -215,7 +215,7 @@ Partial Class Usuarios
         ' 
         CheckBox7.AutoSize = True
         CheckBox7.BackColor = Color.Transparent
-        CheckBox7.Font = New Font("Segoe UI", 10F)
+        CheckBox7.Font = New Font("Segoe UI", 10.0F)
         CheckBox7.ForeColor = Color.Brown
         CheckBox7.Location = New Point(14, 247)
         CheckBox7.Name = "CheckBox7"
@@ -228,7 +228,7 @@ Partial Class Usuarios
         ' 
         CheckBox6.AutoSize = True
         CheckBox6.BackColor = Color.Transparent
-        CheckBox6.Font = New Font("Segoe UI", 10F)
+        CheckBox6.Font = New Font("Segoe UI", 10.0F)
         CheckBox6.ForeColor = Color.Brown
         CheckBox6.Location = New Point(14, 214)
         CheckBox6.Name = "CheckBox6"
@@ -241,7 +241,7 @@ Partial Class Usuarios
         ' 
         CheckBox5.AutoSize = True
         CheckBox5.BackColor = Color.Transparent
-        CheckBox5.Font = New Font("Segoe UI", 10F)
+        CheckBox5.Font = New Font("Segoe UI", 10.0F)
         CheckBox5.ForeColor = Color.Brown
         CheckBox5.Location = New Point(14, 181)
         CheckBox5.Name = "CheckBox5"
@@ -254,7 +254,7 @@ Partial Class Usuarios
         ' 
         CheckBox4.AutoSize = True
         CheckBox4.BackColor = Color.Transparent
-        CheckBox4.Font = New Font("Segoe UI", 10F)
+        CheckBox4.Font = New Font("Segoe UI", 10.0F)
         CheckBox4.ForeColor = Color.Brown
         CheckBox4.Location = New Point(14, 148)
         CheckBox4.Name = "CheckBox4"
@@ -267,7 +267,7 @@ Partial Class Usuarios
         ' 
         CheckBox3.AutoSize = True
         CheckBox3.BackColor = Color.Transparent
-        CheckBox3.Font = New Font("Segoe UI", 10F)
+        CheckBox3.Font = New Font("Segoe UI", 10.0F)
         CheckBox3.ForeColor = Color.Brown
         CheckBox3.Location = New Point(14, 115)
         CheckBox3.Name = "CheckBox3"
@@ -280,7 +280,7 @@ Partial Class Usuarios
         ' 
         CheckBox2.AutoSize = True
         CheckBox2.BackColor = Color.Transparent
-        CheckBox2.Font = New Font("Segoe UI", 10F)
+        CheckBox2.Font = New Font("Segoe UI", 10.0F)
         CheckBox2.ForeColor = Color.Brown
         CheckBox2.Location = New Point(14, 82)
         CheckBox2.Name = "CheckBox2"
@@ -293,7 +293,7 @@ Partial Class Usuarios
         ' 
         CheckBox1.AutoSize = True
         CheckBox1.BackColor = Color.Transparent
-        CheckBox1.Font = New Font("Segoe UI", 10F)
+        CheckBox1.Font = New Font("Segoe UI", 10.0F)
         CheckBox1.ForeColor = Color.Brown
         CheckBox1.Location = New Point(14, 49)
         CheckBox1.Name = "CheckBox1"
@@ -305,7 +305,7 @@ Partial Class Usuarios
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.Font = New Font("Segoe UI", 11F)
+        Label3.Font = New Font("Segoe UI", 11.0F)
         Label3.ForeColor = Color.DodgerBlue
         Label3.Location = New Point(14, 10)
         Label3.Name = "Label3"
@@ -313,36 +313,36 @@ Partial Class Usuarios
         Label3.TabIndex = 3
         Label3.Text = "Asignación de permisos"
         ' 
-        ' TextBox3
+        ' txtPass
         ' 
-        TextBox3.Font = New Font("Segoe UI", 11F)
-        TextBox3.Location = New Point(181, 105)
-        TextBox3.Name = "TextBox3"
-        TextBox3.Size = New Size(202, 32)
-        TextBox3.TabIndex = 6
+        txtPass.Font = New Font("Segoe UI", 11.0F)
+        txtPass.Location = New Point(181, 105)
+        txtPass.Name = "txtPass"
+        txtPass.Size = New Size(202, 32)
+        txtPass.TabIndex = 6
         ' 
         ' Label5
         ' 
         Label5.AutoSize = True
-        Label5.Font = New Font("Segoe UI", 11F)
+        Label5.Font = New Font("Segoe UI", 11.0F)
         Label5.Location = New Point(63, 107)
         Label5.Name = "Label5"
         Label5.Size = New Size(112, 25)
         Label5.TabIndex = 5
         Label5.Text = "Contraseña:"
         ' 
-        ' TextBox2
+        ' txtUsuario
         ' 
-        TextBox2.Font = New Font("Segoe UI", 11F)
-        TextBox2.Location = New Point(181, 65)
-        TextBox2.Name = "TextBox2"
-        TextBox2.Size = New Size(202, 32)
-        TextBox2.TabIndex = 4
+        txtUsuario.Font = New Font("Segoe UI", 11.0F)
+        txtUsuario.Location = New Point(181, 65)
+        txtUsuario.Name = "txtUsuario"
+        txtUsuario.Size = New Size(202, 32)
+        txtUsuario.TabIndex = 4
         ' 
         ' Label4
         ' 
         Label4.AutoSize = True
-        Label4.Font = New Font("Segoe UI", 11F)
+        Label4.Font = New Font("Segoe UI", 11.0F)
         Label4.Location = New Point(87, 65)
         Label4.Name = "Label4"
         Label4.Size = New Size(81, 25)
@@ -377,18 +377,18 @@ Partial Class Usuarios
         GuardarCambiosToolStripMenuItem.Size = New Size(160, 27)
         GuardarCambiosToolStripMenuItem.Text = "Guardar cambios"
         ' 
-        ' TextBox1
+        ' txtNombre
         ' 
-        TextBox1.Font = New Font("Segoe UI", 11F)
-        TextBox1.Location = New Point(181, 26)
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(244, 32)
-        TextBox1.TabIndex = 2
+        txtNombre.Font = New Font("Segoe UI", 11.0F)
+        txtNombre.Location = New Point(181, 26)
+        txtNombre.Name = "txtNombre"
+        txtNombre.Size = New Size(244, 32)
+        txtNombre.TabIndex = 2
         ' 
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Font = New Font("Segoe UI", 11F)
+        Label2.Font = New Font("Segoe UI", 11.0F)
         Label2.Location = New Point(14, 26)
         Label2.Name = "Label2"
         Label2.Size = New Size(169, 25)
@@ -407,7 +407,7 @@ Partial Class Usuarios
         ' 
         ' Usuarios
         ' 
-        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleDimensions = New SizeF(8.0F, 20.0F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.White
         ClientSize = New Size(977, 537)
@@ -446,11 +446,11 @@ Partial Class Usuarios
     Friend WithEvents txtBusca As TextBox
     Friend WithEvents dataListado As DataGridView
     Friend WithEvents Panel4 As Panel
-    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents txtPass As TextBox
     Friend WithEvents Label5 As Label
-    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents txtUsuario As TextBox
     Friend WithEvents Label4 As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtNombre As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Panel5 As Panel
     Friend WithEvents Label3 As Label
@@ -471,6 +471,8 @@ Partial Class Usuarios
     End Sub
 
     Private Sub Usuarios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Mostrar()
+
         Panel4.Visible = False
     End Sub
 
@@ -479,15 +481,52 @@ Partial Class Usuarios
     End Sub
 
     Friend WithEvents MenuStrip1 As MenuStrip
-
-    Private Sub Panel4_Paint(sender As Object, e As PaintEventArgs) Handles Panel4.Paint
-
-    End Sub
-
-    Private Sub MenuStrip2_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles MenuStrip2.ItemClicked
-
-    End Sub
-
     Friend WithEvents GuardarToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GuardarCambiosToolStripMenuItem As ToolStripMenuItem
+
+    Private Sub GuardarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GuardarToolStripMenuItem.Click
+        Try
+            Dim cmd As New SqlCommand
+            conexion_maestra.Abrir()
+            cmd = New SqlCommand("insertar_usuario", conexion_maestra.conexion)
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.Parameters.AddWithValue("@nombre_completo", txtNombre.Text)
+            cmd.Parameters.AddWithValue("@login", txtUsuario.Text)
+            cmd.Parameters.AddWithValue("@password", txtPass.Text)
+            cmd.ExecuteNonQuery()
+            conexion_maestra.Cerrar()
+            Mostrar()
+            Panel4.Visible = False
+        Catch ex As Exception : MsgBox(ex.Message)
+
+        End Try
+    End Sub
+    Sub Mostrar()
+        Dim dt As New DataTable
+        Dim da As New SqlDataAdapter
+        Try
+            conexion_maestra.Abrir()
+            Dim cmd As New SqlCommand("mostrar_usuario", conexion_maestra.conexion)
+            cmd.CommandType = CommandType.StoredProcedure
+            da = New SqlDataAdapter(cmd)
+            da.Fill(dt)
+            dataListado.DataSource = dt
+            conexion_maestra.Cerrar()
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message)
+
+        End Try
+
+
+    End Sub
+
+    Sub mostrarSimple()
+        Dim dt As New DataTable
+        dt.Columns.Add("ID", GetType(Integer))
+        dt.Columns.Add("Nombre", GetType(String))
+        dt.Rows.Add(1, "Ejemplo 1")
+        dt.Rows.Add(2, "Ejemplo 2")
+
+        dataListado.DataSource = dt
+    End Sub
 End Class

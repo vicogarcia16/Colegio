@@ -32,7 +32,9 @@ Partial Class Usuarios
         ToolStripMenuItem1 = New ToolStripMenuItem()
         txtBusca = New TextBox()
         dataListado = New DataGridView()
+        Eli = New DataGridViewImageColumn()
         Panel4 = New Panel()
+        lblIdusuario = New Label()
         Panel5 = New Panel()
         CheckBox9 = New CheckBox()
         CheckBox8 = New CheckBox()
@@ -72,7 +74,7 @@ Partial Class Usuarios
         Panel1.Dock = DockStyle.Top
         Panel1.Location = New Point(0, 0)
         Panel1.Name = "Panel1"
-        Panel1.Size = New Size(977, 57)
+        Panel1.Size = New Size(955, 57)
         Panel1.TabIndex = 0
         ' 
         ' Button1
@@ -81,7 +83,7 @@ Partial Class Usuarios
         Button1.FlatAppearance.BorderSize = 0
         Button1.FlatStyle = FlatStyle.Flat
         Button1.Font = New Font("Segoe UI", 12.0F, FontStyle.Bold)
-        Button1.Location = New Point(930, 10)
+        Button1.Location = New Point(914, 10)
         Button1.Name = "Button1"
         Button1.Size = New Size(38, 36)
         Button1.TabIndex = 1
@@ -106,7 +108,7 @@ Partial Class Usuarios
         Panel3.Dock = DockStyle.Top
         Panel3.Location = New Point(0, 57)
         Panel3.Name = "Panel3"
-        Panel3.Size = New Size(977, 59)
+        Panel3.Size = New Size(955, 59)
         Panel3.TabIndex = 1
         ' 
         ' MenuStrip2
@@ -140,21 +142,35 @@ Partial Class Usuarios
         ' 
         ' dataListado
         ' 
+        dataListado.AllowUserToAddRows = False
         dataListado.AllowUserToDeleteRows = False
         dataListado.AllowUserToResizeRows = False
         dataListado.BackgroundColor = Color.White
         dataListado.BorderStyle = BorderStyle.None
         dataListado.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        dataListado.Columns.AddRange(New DataGridViewColumn() {Eli})
         dataListado.Location = New Point(0, 122)
         dataListado.Name = "dataListado"
         dataListado.ReadOnly = True
+        dataListado.RowHeadersVisible = False
         dataListado.RowHeadersWidth = 51
         dataListado.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        dataListado.Size = New Size(977, 415)
+        dataListado.Size = New Size(795, 394)
         dataListado.TabIndex = 2
+        ' 
+        ' Eli
+        ' 
+        Eli.HeaderText = ""
+        Eli.Image = CType(resources.GetObject("Eli.Image"), Image)
+        Eli.ImageLayout = DataGridViewImageCellLayout.Zoom
+        Eli.MinimumWidth = 6
+        Eli.Name = "Eli"
+        Eli.ReadOnly = True
+        Eli.Width = 125
         ' 
         ' Panel4
         ' 
+        Panel4.Controls.Add(lblIdusuario)
         Panel4.Controls.Add(Panel5)
         Panel4.Controls.Add(txtPass)
         Panel4.Controls.Add(Label5)
@@ -163,10 +179,20 @@ Partial Class Usuarios
         Panel4.Controls.Add(MenuStrip1)
         Panel4.Controls.Add(txtNombre)
         Panel4.Controls.Add(Label2)
-        Panel4.Location = New Point(125, 137)
+        Panel4.Location = New Point(71, 137)
         Panel4.Name = "Panel4"
         Panel4.Size = New Size(700, 353)
         Panel4.TabIndex = 3
+        ' 
+        ' lblIdusuario
+        ' 
+        lblIdusuario.AutoSize = True
+        lblIdusuario.Font = New Font("Segoe UI", 11.0F)
+        lblIdusuario.Location = New Point(20, 69)
+        lblIdusuario.Name = "lblIdusuario"
+        lblIdusuario.Size = New Size(28, 25)
+        lblIdusuario.TabIndex = 9
+        lblIdusuario.Text = "Id"
         ' 
         ' Panel5
         ' 
@@ -398,7 +424,7 @@ Partial Class Usuarios
         ' PictureBox1
         ' 
         PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
-        PictureBox1.Location = New Point(849, 354)
+        PictureBox1.Location = New Point(818, 255)
         PictureBox1.Name = "PictureBox1"
         PictureBox1.Size = New Size(125, 136)
         PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
@@ -410,7 +436,7 @@ Partial Class Usuarios
         AutoScaleDimensions = New SizeF(8.0F, 20.0F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.White
-        ClientSize = New Size(977, 537)
+        ClientSize = New Size(955, 518)
         Controls.Add(PictureBox1)
         Controls.Add(Panel4)
         Controls.Add(Panel3)
@@ -528,5 +554,87 @@ Partial Class Usuarios
         dt.Rows.Add(2, "Ejemplo 2")
 
         dataListado.DataSource = dt
+    End Sub
+    Private Sub dataListado_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dataListado.CellDoubleClick
+        Try
+            Panel4.Visible = True
+            GuardarToolStripMenuItem.Visible = False
+            GuardarCambiosToolStripMenuItem.Visible = True
+            txtNombre.Text = dataListado.SelectedCells.Item(2).Value
+            txtUsuario.Text = dataListado.SelectedCells.Item(3).Value
+            txtPass.Text = dataListado.SelectedCells.Item(4).Value
+            lblIdusuario.Text = dataListado.SelectedCells.Item(1).Value
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Friend WithEvents lblIdusuario As Label
+
+    Private Sub GuardarCambiosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GuardarCambiosToolStripMenuItem.Click
+        Try
+            Dim cmd As New SqlCommand
+            conexion_maestra.Abrir()
+            cmd = New SqlCommand("editar_usuario", conexion_maestra.conexion)
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.Parameters.AddWithValue("@id_usuario", lblIdusuario.Text)
+            cmd.Parameters.AddWithValue("@nombre_completo", txtNombre.Text)
+            cmd.Parameters.AddWithValue("@login", txtUsuario.Text)
+            cmd.Parameters.AddWithValue("@password", txtPass.Text)
+            cmd.ExecuteNonQuery()
+            conexion_maestra.Cerrar()
+            Mostrar()
+            Panel4.Visible = False
+        Catch ex As Exception : MsgBox(ex.Message)
+
+        End Try
+    End Sub
+
+    Private Sub dataListado_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dataListado.CellClick
+        If e.ColumnIndex = Me.dataListado.Columns.Item("Eli").Index Then
+            Dim result As DialogResult
+            result = MessageBox.Show("¿Realmente desea eliminar este usuario?", "Eliminando registros",
+                                    MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
+            If result = DialogResult.OK Then
+                Try
+                    Dim cmd As New SqlCommand
+                    conexion_maestra.Abrir()
+                    cmd = New SqlCommand("eliminar_usuario", conexion_maestra.conexion)
+                    cmd.CommandType = CommandType.StoredProcedure
+                    cmd.Parameters.AddWithValue("@id_usuario", dataListado.SelectedCells.Item(1).Value)
+                    cmd.ExecuteNonQuery()
+                    conexion_maestra.Cerrar()
+                    Mostrar()
+                    Panel4.Visible = False
+                Catch ex As Exception : MsgBox(ex.Message)
+
+                End Try
+            Else
+                MessageBox.Show("Cancelando eliminación de registros", "Eliminando registros",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        End If
+    End Sub
+
+    Friend WithEvents Eli As DataGridViewImageColumn
+    Sub Buscar()
+        Dim dt As New DataTable
+        Dim da As New SqlDataAdapter
+        Try
+            conexion_maestra.Abrir()
+            Dim cmd As New SqlCommand("buscar_usuario", conexion_maestra.conexion)
+            cmd.CommandType = CommandType.StoredProcedure
+            da = New SqlDataAdapter(cmd)
+            da.SelectCommand.Parameters.AddWithValue("@letra", txtBusca.Text)
+            da.Fill(dt)
+            dataListado.DataSource = dt
+            conexion_maestra.Cerrar()
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message)
+
+        End Try
+    End Sub
+    Private Sub txtBusca_TextChanged(sender As Object, e As EventArgs) Handles txtBusca.TextChanged
+        Buscar()
     End Sub
 End Class
